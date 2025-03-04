@@ -22,7 +22,9 @@ def prev_text():
 
 window = tk.Tk()
 window.title("Sentiment Analysis")
-window.geometry("400x200")
+width = window.winfo_screenwidth()
+height = window.winfo_screenheight()
+window.geometry('%dx%d+0+0' % (width,height))
 
 text_label = tk.Label(window, text=texts[index], font=("Arial", 14))
 text_label.pack(pady=10)
@@ -35,3 +37,10 @@ button_frame.pack(pady=10)
 
 prev_button = tk.Button(button_frame, text="⬅ Prev", command=prev_text)
 prev_button.pack(side=tk.LEFT, padx=10)
+
+next_button = tk.Button(button_frame, text="Next ➡", command=next_text)
+next_button.pack(side=tk.RIGHT, padx=10)
+
+window.resizable(True, True)
+
+window.mainloop()
