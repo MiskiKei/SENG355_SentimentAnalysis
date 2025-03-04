@@ -1,4 +1,3 @@
-# reddit_api.py
 import praw
 from config import CLIENT_ID, CLIENT_SECRET, USER_AGENT
 
