@@ -1,45 +1,50 @@
 import tkinter as tk
+import random
 
-texts = ["This is the first text", "Here is the second one", "Another example of text", "Final text in the array"]
-scores = [1, 0, 1, 0]
-index = 0
 
-def update_display():
-    text_label.configure(text=texts[index])
-    score_label.configure(text=f"Score: {scores[index]}")
+def populate_boxes():
+    user_input = entry.get()
+    for i in range(10):
+        labels[i].configure(text=f"{user_input} {i + 1}")
 
-def next_text():
-    global index
-    if index < len(texts) - 1:
-        index += 1
-        update_display()
 
-def prev_text():
-    global index
-    if index > 0:
-        index -= 1
-        update_display()
+def assign_scores():
+    for i in range(10):
+        score_labels[i].configure(text=str(random.randint(1, 100)))
+
 
 window = tk.Tk()
-window.title("Sentiment Analysis")
+window.title("Sentiment Analyzer")
 width = window.winfo_screenwidth()
 height = window.winfo_screenheight()
 window.geometry('%dx%d+0+0' % (width,height))
 
-text_label = tk.Label(window, text=texts[index], font=("Arial", 14))
-text_label.pack(pady=10)
+entry = tk.Entry(window, width=30)
+entry.pack(pady=5)
 
-score_label = tk.Label(window, text=f"Score: {scores[index]}", font=("Arial", 12))
-score_label.pack(pady=5)
+search_button = tk.Button(window, text="Pull from Subreddit", command=populate_boxes)
+search_button.pack(pady=5)
 
-button_frame = tk.Frame(window)
-button_frame.pack(pady=10)
+frame = tk.Frame(window)
+frame.pack()
 
-prev_button = tk.Button(button_frame, text="⬅ Prev", command=prev_text)
-prev_button.pack(side=tk.LEFT, padx=10)
+labels = []
+score_labels = []
 
-next_button = tk.Button(button_frame, text="Next ➡", command=next_text)
-next_button.pack(side=tk.RIGHT, padx=10)
+for i in range(10):
+    row_frame = tk.Frame(frame)
+    row_frame.pack(pady=2)
+
+    label = tk.Label(row_frame, text="", width=20, anchor="w", relief="sunken")
+    label.pack(side=tk.LEFT)
+    labels.append(label)
+
+    score_label = tk.Label(row_frame, text="")
+    score_label.pack(side=tk.LEFT, padx=10)
+    score_labels.append(score_label)
+
+analyze_button = tk.Button(window, text="Analyze Sentiment", command=assign_scores)
+analyze_button.pack(pady=5)
 
 window.resizable(True, True)
 
