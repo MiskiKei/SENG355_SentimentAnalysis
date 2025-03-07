@@ -14,13 +14,3 @@ class RedditAPI:
         subreddit = self.reddit.subreddit(subreddit_name)
         return [submission.title + " " + submission.selftext for submission in subreddit.hot(limit=limit)]
 
-
-if __name__ == "__main__":
-    subreddit_name = "music"
-
-    reddit_api = RedditAPI()
-
-    posts = reddit_api.get_posts(subreddit_name)
-
-    for i, post in enumerate(posts):
-        print(f"{i + 1}: {post}\n")
