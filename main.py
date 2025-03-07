@@ -57,7 +57,8 @@ class SentimentAnalyzerGUI:
         else:
             for i, post in enumerate(self.posts, start=1):
                 self.text_area.insert(tk.END, f"Post {i}:\n{post}\n")
-                self.text_area.insert(tk.END, "-" * 80 + "\n")
+                if i < 10:
+                    self.text_area.insert(tk.END, "-" * 80 + "\n")
                 self.stored_posts.append(f"Post {i}:\n{post}\n")
 
     def analyze_sentiments(self):
